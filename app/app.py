@@ -20,9 +20,6 @@ def apply():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
 
-	print(request.args)
-	# print(request.url)
-
 	if len(request.args) == 0:
 		return 'argError:Zero'
 	
@@ -71,7 +68,6 @@ def predict():
 		myJson_modified = json.dumps(myJson)
 		prob = model.predict(myJson)
 		prob = str(prob)
-		time.sleep(20)
 		print(prob)
 	
 		return prob
@@ -83,7 +79,7 @@ def predict():
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    return 'helloinnerve'
+    return 'HeyMozoHack!'
 
 
 if __name__ == "__main__":

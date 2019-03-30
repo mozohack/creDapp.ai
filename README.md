@@ -1,5 +1,5 @@
 # creDapp.ai
-Decentralized AI-powered Banking-CRA solution.
+Decentralized AI-powered Banking-CRA solution
 
 Architecture Diagram
 

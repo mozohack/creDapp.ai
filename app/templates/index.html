@@ -49,6 +49,11 @@
 						</div>
 					</section>
 
+					<center>
+					<button id="contractCreator" name="contractCreator">Create Contract</button>
+					<a id="applyLink" name="applyLink" href="/apply"><button>Apply</button></a>
+				</center>
+
 				<!-- Wrapper -->
 					<section id="wrapper">
 
@@ -165,6 +170,178 @@
 			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
 			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
 			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@0.19.0/dist/web3.min.js"></script>
+
+			<script>
+				if(typeof web3 !== 'undefined')
+				{
+				  web3 = new Web3(web3.currentProvider);
+				}
+				else
+				{
+				  alert("Install MetaMask / other Web3 Injector to use this service");
+				  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+				}
+				web3.version.getNetwork((err, netId) => {
+		   switch (netId) {
+			 case "1":
+			   console.log('This is mainnet')
+			   break
+			 case "2":
+			   console.log('This is the deprecated Morden test network.')
+			   break
+			 case "3":
+			   console.log('This is the ropsten test network.')
+			   break
+			 case "4":
+			   console.log('This is the Rinkeby test network.')
+			   break
+			 case "42":
+			   console.log('This is the Kovan test network.')
+			   break
+			 default:
+			   console.log('This is an unknown network.')
+		   }
+		   })
+		   
+		   // var thisContract =  "<%= currentContract %>";
+		   var thisContract =  "0x0333978f1eda0724f6f6d7d9c9388fb88aa92138";
+		   var abiArray = [
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "createContract",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "Factory",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "allFrauds",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "factoryOwner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "fraudCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAllContracts",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "queryID",
+				"type": "uint256"
+			}
+		],
+		"name": "getByID",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+		   
+		   console.log(thisContract);
+		   console.log(abiArray);
+		   
+		   web3.eth.defaultAccount=web3.eth.accounts[0];
+		   var testContract = web3.eth.contract(abiArray);
+		   var test = testContract.at(thisContract);
+
+		   var whichContract = "";
+
+		   
+		   $("#contractCreator").click(function() {
+
+			test.createContract(function(err, res) {
+				if (err) {
+					console.log("Problem creating contract");
+				} else {
+
+					test.getAllContracts(function(error, result) {
+						for (var i = 0; i < result.length; i++) {
+							whichContract = result[i];
+						}
+						document.getElementById("applyLink").href += ("?contract=" + whichContract);
+					});
+
+				}
+
+			});
+		   });
+		   
+
+
+		   
+		</script>   
+
 
 	</body>
 </html>

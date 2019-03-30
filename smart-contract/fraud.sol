@@ -1,8 +1,8 @@
-pragma solidity ^0.4.21;
+pragma solidity >=0.4.22 <0.6.0;
 pragma experimental ABIEncoderV2;
 
 // import "./SafeMath.sol";
-import "github.com/oraclize/ethereum-api/oraclizeAPI.sol";
+import "https://raw.githubusercontent.com/oraclize/ethereum-api/master/oraclizeAPI_0.4.25.sol";
 
 contract FraudFactory {
     
@@ -117,7 +117,7 @@ contract Fraud is usingOraclize {
     }
     
     function getData(bytes32[] intAttr, uint256[] intVal, bytes32[] stringAttr, bytes32[] stringVal, bytes32[] boolAttr, bool[] boolVal) public returns (bool) {
-        paramURL = "https://df19acbd.ngrok.io/predict?";
+        paramURL = "https://credapp--spotifyrounak.repl.co/predict?";
         bytes32 eq = "=";
         
         require(intAttr.length == intVal.length);
@@ -149,6 +149,7 @@ contract Fraud is usingOraclize {
     function computeFraud() payable {
         if (oraclize_getPrice("URL") > this.balance) {
             LogNewOraclizeQuery("Oraclize query was NOT sent, please add some ETH to cover for the query fee");
+            oraclize_query("URL", string(abi.encodePacked(paramURL, "")));
         } else {
             LogNewOraclizeQuery("Oraclize query was sent, standing by for the answer..");
             
