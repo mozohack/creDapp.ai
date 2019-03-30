@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>About - CreÐApp.ai</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="/">CreÐApp.ai</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About</a></li>
+								<li><a href="/apply">Apply</a></li>
+								<li><a href="#">Log In</a></li>
+								<li><a href="#">Sign Up</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>CreÐApp.ai</h2>
+								<p>The first ever decentralized AI-driven credit rating solution</p>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<h3 class="major">About</h3>
+									<p>CreÐApp.ai is the first ever decentralized AI-driven credit rating solution platform which replaces the middlemen using an automated AI_driven, distributed and transparent ledger. We call it an Intelligent Contract.</p>
+
+									<p>The user fills a loan registration form which consists of various generic parameters such as Income Amount, Credit Amount, Gender, Etc. After filling the form, the data is passed to a decentralized storage system made on Ethereum Ropsten TestNet. This data now cannot be meddled with and goes to the flask server for AI computation. The AI model predicts if the user is viable for the loan or not and sends back a credit score. This is also sent through the smart contract and back to the user.</p>
+
+									<h3 class="major">Technology Stack</h3>
+									<p>We've used various state of the art technologies to build the platform so that it can always be compatible and widely used.</p>
+
+									<section class="features">
+										<article>
+											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
+											<h3 class="major">Web Application</h3>
+											<p>The Front-End is built using HTML, CSS3 and JavaScript and using Bootstrap which ensures the code is responsive across devices, and is well-presentable.</p>
+											<p>The Back-End is made using Flask (Python)</p>
+											<a href="#" class="special">Learn more</a>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
+											<h3 class="major">Artificial Intelligence</h3>
+											<p>Python, lightgbm, Keras, AWS CLI, Numpy, Pandas, etc.</p>
+											<a href="#" class="special">Learn more</a>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
+											<h3 class="major">Blockchain</h3>
+											<p>Ethereum, Metamask, Kovan / Ropsten test net, Solidity, Truffle, Oraclize.</p>
+											<a href="#" class="special">Learn more</a>
+										</article>
+									</section>
+
+								</div>
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+	</body>
+</html>

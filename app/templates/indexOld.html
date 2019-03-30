@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Innerve 2k18</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+
+<!--<form action="/compute" method="POST">-->
+
+<h1>Fraud Detection</h1>
+
+<label for="aadhaar">Aadhar ID</label><br>
+<input type="text" id="aadhaar" name="aadhaar"><br>
+
+<label for="NAME_CONTRACT_TYPE">Name Contract Type</label><br>
+<input type="text" id="NAME_CONTRACT_TYPE" name="NAME_CONTRACT_TYPE"><br>
+
+<label for="CODE_GENDER">Gender</label><br>
+<input type="text" id="CODE_GENDER" name="CODE_GENDER"><br>
+
+<label for="FLAG_OWN_CAR">Owns Car?(Number)</label><br>
+<input type="text" id="FLAG_OWN_CAR" name="FLAG_OWN_CAR"><br>
+
+<label for="FLAG_OWN_REALTY">Owns Real Estate?(Number)</label><br>
+<input type="text" id="FLAG_OWN_REALTY" name="FLAG_OWN_REALTY"><br>
+
+<label for="CNT_CHILDREN">Count Children?(Number)</label><br>
+<input type="number" id="CNT_CHILDREN" name="CNT_CHILDREN"><br>
+
+<label for="AMT_INCOME_TOTAL">Total Income</label><br>
+<input type="number" id="AMT_INCOME_TOTAL" name="AMT_INCOME_TOTAL"><br>
+
+<label for="AMT_CREDIT">Credit Amount</label><br>
+<input type="number" id="AMT_CREDIT" name="AMT_CREDIT"><br>
+
+<label for="AMT_ANNUITY">Annuity Amount</label><br>
+<input type="number" id="AMT_ANNUITY" name="AMT_ANNUITY"><br>
+
+<label for="NAME_TYPE_SUITE">Suite Type (Family or Unaccompanied)</label><br>
+<input type="text" id="NAME_TYPE_SUITE" name="NAME_TYPE_SUITE"><br>
+
+<label for="NAME_INCOME_TYPE">Income Type?(Businessman, Commercial Associate, Working, Pensioner, State Servant, )</label><br>
+<input type="text" id="NAME_INCOME_TYPE" name="NAME_INCOME_TYPE"><br>
+
+<label for="NAME_EDUCATION_TYPE">Education Type(Higher, Secondary, Lower)</label><br>
+<input type="text" id="NAME_EDUCATION_TYPE" name="NAME_EDUCATION_TYPE"><br>
+
+<label for="NAME_FAMILY_STATUS">Family Status(Married, Single, Civil, Widow, Separated)</label><br>
+<input type="text" id="NAME_FAMILY_STATUS" name="NAME_FAMILY_STATUS"><br>
+
+<label for="NAME_HOUSING_TYPE">Housing Type(house/apt, with parents, Rented, Municipal Apartment)</label><br>
+<input type="text" id="NAME_HOUSING_TYPE" name="NAME_HOUSING_TYPE"><br>
+
+<label for="DAYS_EMPLOYED">Employement Days(number)</label><br>
+<input type="number" id="DAYS_EMPLOYED" name="DAYS_EMPLOYED"><br>
+
+<label for="DAYS_BIRTH">Date of Birth(Number</label><br>
+<input type="number" id="DAYS_BIRTH" name="DAYS_BIRTH"><br>
+
+<label for="OWN_CAR_AGE">Car Owned Age (No of years)</label><br>
+<input type="number" id="OWN_CAR_AGE" name="OWN_CAR_AGE"><br>
+
+<label for="OCCUPATION_TYPE">Occupation Type(Low-skill laborers, Drivers, High skill tech staff, Core Staff, Laborers, )</label><br>
+<input type="text" id="OCCUPATION_TYPE" name="OCCUPATION_TYPE"><br>
+
+
+<br><br><br>
+<button type="button" id="sendData">Send Data to Ethereum</button>
+<button type="button" id="computeFraud" style="display: none;">Compute Fraud</button>
+
+<button type="button" id="showProb" style="display: none;">Show Probability</button>
+
+<div id="result"></div>
+
+<!--</form>-->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@0.19.0/dist/web3.min.js"></script>
+
+ <script>
+     if(typeof web3 !== 'undefined')
+     {
+       web3 = new Web3(web3.currentProvider);
+     }
+     else
+     {
+       alert("Install MetaMask / other Web3 Injector to use this service");
+       web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+     }
+     web3.version.getNetwork((err, netId) => {
+switch (netId) {
+  case "1":
+    console.log('This is mainnet')
+    break
+  case "2":
+    console.log('This is the deprecated Morden test network.')
+    break
+  case "3":
+    console.log('This is the ropsten test network.')
+    break
+  case "4":
+    console.log('This is the Rinkeby test network.')
+    break
+  case "42":
+    console.log('This is the Kovan test network.')
+    break
+  default:
+    console.log('This is an unknown network.')
+}
+})
+
+// var thisContract =  "<%= currentContract %>";
+var thisContract =  "0xe6Aad1aE520754A94c966ef48DC8D57750Aee318";
+var abiArray = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "myid",
+				"type": "bytes32"
+			},
+			{
+				"name": "result",
+				"type": "string"
+			}
+		],
+		"name": "__callback",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "myid",
+				"type": "bytes32"
+			},
+			{
+				"name": "result",
+				"type": "string"
+			},
+			{
+				"name": "proof",
+				"type": "bytes"
+			}
+		],
+		"name": "__callback",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "computeFraud",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "attribute",
+				"type": "string"
+			},
+			{
+				"name": "val",
+				"type": "bool"
+			}
+		],
+		"name": "getBoolData",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "intAttr",
+				"type": "bytes32[]"
+			},
+			{
+				"name": "intVal",
+				"type": "uint256[]"
+			},
+			{
+				"name": "stringAttr",
+				"type": "bytes32[]"
+			},
+			{
+				"name": "stringVal",
+				"type": "bytes32[]"
+			},
+			{
+				"name": "boolAttr",
+				"type": "bytes32[]"
+			},
+			{
+				"name": "boolVal",
+				"type": "bool[]"
+			}
+		],
+		"name": "getData",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "attribute",
+				"type": "string"
+			},
+			{
+				"name": "val",
+				"type": "uint256"
+			}
+		],
+		"name": "getIntData",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "attribute",
+				"type": "string"
+			},
+			{
+				"name": "val",
+				"type": "string"
+			}
+		],
+		"name": "getStringData",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "description",
+				"type": "string"
+			}
+		],
+		"name": "LogNewOraclizeQuery",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "output",
+				"type": "string"
+			}
+		],
+		"name": "LogOutputReceived",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "nextStep",
+				"type": "string"
+			}
+		],
+		"name": "LogConstructorInitiated",
+		"type": "event"
+	},
+	{
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"name": "fOwner",
+				"type": "address"
+			},
+			{
+				"name": "_fraudID",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "x",
+				"type": "bytes32"
+			}
+		],
+		"name": "bytes32ToString",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "fraduProb",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "fraudProbability",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getParamURL",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "isFraud",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "paramURL",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "v",
+				"type": "uint256"
+			}
+		],
+		"name": "uintToBytes",
+		"outputs": [
+			{
+				"name": "ret",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+console.log(thisContract);
+console.log(abiArray);
+
+web3.eth.defaultAccount=web3.eth.accounts[0];
+var testContract = web3.eth.contract(abiArray);
+var test = testContract.at(thisContract);
+
+
+
+
+$("#sendData").click(function() {
+  test.getData(["CNT_CHILDREN=", "AMT_INCOME_TOTAL=", "AMT_CREDIT=", "AMT_ANNUITY=", "DAYS_EMPLOYED=", "DAYS_BIRTH=", "OWN_CAR_AGE="], [$("#CNT_CHILDREN").val(), $("#AMT_INCOME_TOTAL").val(), $("#AMT_CREDIT").val(), $("#AMT_ANNUITY").val(), $("#DAYS_EMPLOYED").val(), $("#DAYS_BIRTH").val(), $("#OWN_CAR_AGE").val()], ["NAME_CONTRACT_TYPE=", "CODE_GENDER=", "FLAG_OWN_CAR=", "FLAG_OWN_REALTY=", "NAME_TYPE_SUITE=", "NAME_INCOME_TYPE=", "NAME_EDUCATION_TYPE=", "NAME_FAMILY_STATUS=", "NAME_HOUSING_TYPE=", "OCCUPATION_TYPE="], [$("#NAME_CONTRACT_TYPE").val(), $("#CODE_GENDER").val(), $("#FLAG_OWN_CAR").val(), $("#FLAG_OWN_REALTY").val(), $("#NAME_TYPE_SUITE").val(), $("#NAME_INCOME_TYPE").val(), $("#NAME_EDUCATION_TYPE").val(), $("#NAME_FAMILY_STATUS").val(), $("#NAME_HOUSING_TYPE").val(), $("#OCCUPATION_TYPE").val()], [], [], (error,result) => (console.log(result)));
+
+document.getElementById("computeFraud").click();
+document.getElementById("showProb").click()
+
+});
+
+$("#computeFraud").click(function() {
+	test.computeFraud.sendTransaction({value: 1000000000000000000}, (error, result) => (console.log(result)));
+});
+
+$("#showProb").click(function() {
+	test.fraduProb(function(err, res) {
+		console.log(res);
+	});
+
+var data = null;
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+    document.getElementById("result").innerHTML = this.responseText;
+  }
+});
+
+xhr.open("GET", "https://df19acbd.ngrok.io/predict?CNT_CHILDREN="+$("#CNT_CHILDREN").val()+"&AMT_INCOME_TOTAL="+$("#AMT_INCOME_TOTAL").val()+"&AMT_CREDIT="+$("#AMT_CREDIT").val()+"&AMT_ANNUITY="+$("#AMT_ANNUITY").val()+"&DAYS_EMPLOYED="+$("#DAYS_EMPLOYED").val()+"&DAYS_BIRTH="+$("#DAYS_BIRTH").val()+"&OWN_CAR_AGE="+$("#OWN_CAR_AGE").val()+"&NAME_CONTRACT_TYPE="+$("#NAME_CONTRACT_TYPE").val()+"&CODE_GENDER="+$("#CODE_GENDER").val()+"&FLAG_OWN_CAR="+$("#FLAG_OWN_CAR").val()+"&FLAG_OWN_REALTY="+$("#FLAG_OWN_REALTY").val()+"&NAME_TYPE_SUITE="+$("#NAME_TYPE_SUITE").val()+"&NAME_INCOME_TYPE="+$("#NAME_INCOME_TYPE").val()+"&NAME_EDUCATION_TYPE="+$("#NAME_EDUCATION_TYPE").val()+"&NAME_FAMILY_STATUS="+$("#NAME_FAMILY_STATUS").val()+"&NAME_HOUSING_TYPE="+$("#NAME_HOUSING_TYPE").val()+"&OCCUPATION_TYPE="+$("#OCCUPATION_TYPE").val());
+xhr.setRequestHeader("cache-control", "no-cache");
+xhr.setRequestHeader("postman-token", "b844f975-50ed-b943-85c7-7f0ea86bc623");
+
+xhr.send(data);
+
+
+})
+
+/*
+
+$("#compute").click(function() {
+	test.getData(["id", "age"], [1, 20], [], [], [], [], function(err, result) {
+		console.log(result);
+		console.log(err);
+	});
+});
+
+*/
+
+</script>
+
+
+</body>
+</html>
