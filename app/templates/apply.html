@@ -115,28 +115,28 @@
 												<div class="col-12">
 													<label for="CODE_GENDER">Gender</label>
 													<div class="col-4 col-12-small">
-														<input type="checkbox" id="CODE_GENDERM" name="CODE_GENDER" value="M" onchange="document.getElementById('CODE_GENDERF').checked = false;">
-														<label for="CODE_GENDERM">Male</label>
-														<input type="checkbox" id="CODE_GENDERF" name="CODE_GENDER" value="F" onchange="document.getElementById('CODE_GENDERM').checked = false;">
-														<label for="CODE_GENDERF">Female</label>
+														<input type="checkbox" id="CODE_GENDER" name="CODE_GENDER" value="M">
+														<label for="CODE_GENDER">Male</label>
+														<input type="checkbox" id="CODE_GENDER" name="CODE_GENDER" value="F">
+														<label for="CODE_GENDER">Female</label>
 													</div>
 												</div>
 												<div class="col-12">
 													<label for="demo-gender">Owns Car</label>
 													<div class="col-4 col-12-small">
-														<input type="radio" id="FLAG_OWN_CARY" name="CAR" value="Y" onchange="document.getElementById('FLAG_OWN_CARN').checked = false;">
-														<label for="FLAG_OWN_CARY">Yes</label>
-														<input type="radio" id="FLAG_OWN_CARN" name="CAR" value="N" onchange="document.getElementById('FLAG_OWN_CARY').checked = false;">
-														<label for="FLAG_OWN_CARN">No</label>
+														<input type="radio" id="FLAG_OWN_CAR" name="CAR" value="Y">
+														<label for="FLAG_OWN_CAR">Yes</label>
+														<input type="radio" id="FLAG_OWN_CAR" name="CAR" value="N">
+														<label for="FLAG_OWN_CAR">No</label>
 													</div>
 												</div>
 												<div class="col-12">
 													<label for="demo-gender">Owns Real Estate</label>
 													<div class="col-4 col-12-small">
-														<input type="radio" id="FLAG_OWN_REALTYY" name="REALTY" value="Y" onchange="document.getElementById('FLAG_OWN_REALTYN').checked = false;">
-														<label for="FLAG_OWN_REALTYY">Yes</label>
-														<input type="radio" id="FLAG_OWN_REALTYN" name="REALTY" value="N" onchange="document.getElementById('FLAG_OWN_REALTYY').checked = false;">
-														<label for="FLAG_OWN_REALTYN">No</label>
+														<input type="radio" id="FLAG_OWN_REALTY" name="REALTY" value="Y">
+														<label for="FLAG_OWN_REALTY">Yes</label>
+														<input type="radio" id="FLAG_OWN_REALTY" name="REALTY" value="N">
+														<label for="FLAG_OWN_REALTY">No</label>
 													</div>
 												</div>
 												<div class="col-12">
@@ -150,21 +150,21 @@
 												<div class="col-12">
 													<label for="demo-gender">Suite Type</label>
 													<div class="col-4 col-12-small">
-														<input type="radio" id="NAME_TYPE_SUITEF" name="SUITE" value="Family" onchange="document.getElementById('NAME_TYPE_SUITEU').checked = false;">
-														<label for="NAME_TYPE_SUITEF">Family</label>
-														<input type="radio" id="NAME_TYPE_SUITEU" name="SUITE" value="Unaccompanied" onchange="document.getElementById('NAME_TYPE_SUITEF').checked = false;">
-														<label for="NAME_TYPE_SUITEU">Unaccompanied</label>
+														<input type="radio" id="NAME_TYPE_SUITE" name="SUITE" value="Family">
+														<label for="NAME_TYPE_SUITE">Family</label>
+														<input type="radio" id="NAME_TYPE_SUITE" name="SUITE" value="Unaccompanied">
+														<label for="NAME_TYPE_SUITE">Unaccompanied</label>
 													</div>
 												</div>
 												<div class="col-12">
 													<label for="demo-gender">Education Type</label>
 													<div class="col-4 col-12-small">
-														<input type="radio" id="NAME_EDUCATION_TYPEH" name="EDUCATION_TYPE" value="Higher" onchange="document.getElementById('NAME_EDUCATION_TYPES').checked = false; document.getElementById('NAME_EDUCATION_TYPEL').checked = false;">
-														<label for="NAME_EDUCATION_TYPEH">Higher</label>
-														<input type="radio" id="NAME_EDUCATION_TYPES" name="EDUCATION_TYPE" value="Secondary" onchange="document.getElementById('NAME_EDUCATION_TYPEH').checked = false; document.getElementById('NAME_EDUCATION_TYPEL').checked = false;">
-														<label for="NAME_EDUCATION_TYPES">Secondary</label>
-														<input type="radio" id="NAME_EDUCATION_TYPEL" name="EDUCATION_TYPE" value="Lower" onchange="document.getElementById('NAME_EDUCATION_TYPEH').checked = false; document.getElementById('NAME_EDUCATION_TYPES').checked = false;">
-														<label for="NAME_EDUCATION_TYPEL">Lower</label>
+														<input type="radio" id="NAME_EDUCATION_TYPE" name="EDUCATION_TYPE" value="Higher">
+														<label for="NAME_EDUCATION_TYPE">Higher</label>
+														<input type="radio" id="NAME_EDUCATION_TYPE" name="EDUCATION_TYPE" value="Secondary">
+														<label for="NAME_EDUCATION_TYPE">Secondary</label>
+														<input type="radio" id="NAME_EDUCATION_TYPE" name="EDUCATION_TYPE" value="Lower">
+														<label for="NAME_EDUCATION_TYPE">Lower</label>
 													</div>
 												</div>
 												<div class="col-12">
@@ -274,14 +274,13 @@
 			 default:
 			   console.log('This is an unknown network.')
 		   }
-		   });
+		   })
 
-			 const urlParams = new URLSearchParams(window.location.search);
-			const myParam = urlParams.get('contract');
+       const urlParams = new URLSearchParams(window.location.search);
+const myParam = urlParams.get('contract');
 		   
 		   // var thisContract =  "<%= currentContract %>";
 		   var thisContract =  myParam;
-			 console.log(thisContract);
 		   var abiArray = [
 	{
 		"constant": false,
@@ -613,49 +612,21 @@
 			   test.computeFraud.sendTransaction({value: 9000}, (error, result) => {
 					 console.log(result);
 					 });
-
 			   //document.getElementById("showProb").click()
 		   });
 		   
 		   $("#showProb").click(function() {
 			   test.fraduProb(function(err, res) {
 				   console.log(res);
-
 					 if(res > 60) {
 			   			document.getElementById("result").innerHTML = '<center><p id="rcorners1"><b>Score : ' + res + '<br>ACCEPTABLE RISK</b></p></center><br>';
 			   		}
 			   		else {
 			   			document.getElementById("result").innerHTML = '<center><p id="rcorners2"><b>Score : ' + res + '<br>NOT ACCEPTABLE RISK</b></p></center><br>';
 			   }
-
-
 			   });
-		   
-		  //  var data = null;
-		   
-		  //  var xhr = new XMLHttpRequest();
-		  //  xhr.withCredentials = true;
-		   
-		  //  xhr.addEventListener("readystatechange", function () {
-			//  if (this.readyState === 4) {
-			//    console.log(this.responseText);
-			//    if(this.responseText > 60) {
-			//    	document.getElementById("result").innerHTML = '<center><p id="rcorners1"><b>Score : ' + this.responseText + '<br>ACCEPTABLE RISK</b></p></center><br>';
-			//    }
-			//    else {
-			//    	document.getElementById("result").innerHTML = '<center><p id="rcorners2"><b>Score : ' + this.responseText + '<br>NOT ACCEPTABLE RISK</b></p></center><br>';
-			//    }
-			//  }
-		  //  });
-		   
-		  //  xhr.open("GET", "http://localhost:5000/predict?CNT_CHILDREN="+$("#CNT_CHILDREN").val()+"&AMT_INCOME_TOTAL="+$("#AMT_INCOME_TOTAL").val()+"&AMT_CREDIT="+$("#AMT_CREDIT").val()+"&AMT_ANNUITY="+$("#AMT_ANNUITY").val()+"&DAYS_EMPLOYED="+$("#DAYS_EMPLOYED").val()+"&DAYS_BIRTH="+$("#DAYS_BIRTH").val().replace(/-/gi, "")+"&OWN_CAR_AGE="+$("#OWN_CAR_AGE").val()+"&NAME_CONTRACT_TYPE="+$("#NAME_CONTRACT_TYPE").val()+"&CODE_GENDER="+$("#CODE_GENDER").val()+"&FLAG_OWN_CAR="+$("#FLAG_OWN_CAR").val()+"&FLAG_OWN_REALTY="+$("#FLAG_OWN_REALTY").val()+"&NAME_TYPE_SUITE="+$("#NAME_TYPE_SUITE").val()+"&NAME_INCOME_TYPE="+$("#NAME_INCOME_TYPE").val()+"&NAME_EDUCATION_TYPE="+$("#NAME_EDUCATION_TYPE").val()+"&NAME_FAMILY_STATUS="+$("#NAME_FAMILY_STATUS").val()+"&NAME_HOUSING_TYPE="+$("#NAME_HOUSING_TYPE").val()+"&OCCUPATION_TYPE="+$("#OCCUPATION_TYPE").val());
-		  //  xhr.setRequestHeader("cache-control", "no-cache");
-		  //  xhr.setRequestHeader("postman-token", "b844f975-50ed-b943-85c7-7f0ea86bc623");
-		   
-		  //  xhr.send(data);
-		   
-		   
-		   });
+       });
+
 		   
 		   /*
 		   
@@ -668,18 +639,7 @@
 		   
 		   */
 		   
-			 </script>
-			 
-			 <script>
-					function selectOnlyThisG(id) {
-					    for (var i = 1;i <= 2; i++)
-					    {
-					        document.getElementById("CODE_GENDER" + i).checked = false;
-					    }
-					    document.getElementById(id).checked = true;
-							console.log("done");
-					}				 
-			 </script>
+		   </script>
 
 	</body>
 </html>
