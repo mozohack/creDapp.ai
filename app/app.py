@@ -1,9 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory
-import model, time
+import model
 import json
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -11,11 +10,11 @@ def index():
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-	return render_template('generic.html')
+	return render_template('about.html')
 
 @app.route('/apply', methods=['GET', 'POST'])
 def apply():
-	return render_template('elements.html')
+	return render_template('apply.html')
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
@@ -64,10 +63,7 @@ def predict():
 		}
 
 		print(myJson)
-	
-		myJson_modified = json.dumps(myJson)
-		prob = model.predict(myJson)
-		prob = str(prob)
+		prob = str(model.predict(myJson)) # invocating the ML model
 		print(prob)
 	
 		return prob

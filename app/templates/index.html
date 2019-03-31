@@ -51,7 +51,7 @@
 
 					<center>
 					<button id="contractCreator" name="contractCreator">Create Contract</button>
-					<a id="applyLink" name="applyLink" href="/apply"><button>Apply</button></a>
+					<button id="applyLink" name="applyLink" value="/apply" onclick="gotoPage()" disabled>Apply</button>
 				</center>
 
 				<!-- Wrapper -->
@@ -329,7 +329,8 @@
 						for (var i = 0; i < result.length; i++) {
 							whichContract = result[i];
 						}
-						document.getElementById("applyLink").href += ("?contract=" + whichContract);
+						document.getElementById("applyLink").value += ("?contract=" + whichContract);
+						document.getElementById("applyLink").disabled = false;
 					});
 
 				}
@@ -341,6 +342,16 @@
 
 		   
 		</script>   
+
+		<script>
+		
+		function gotoPage() {
+			var whatsTheLink = document.getElementById("applyLink").value;
+			console.log(whatsTheLink);
+			window.location = whatsTheLink;
+		}
+		
+		</script>
 
 
 	</body>
