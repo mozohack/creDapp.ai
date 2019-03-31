@@ -1,0 +1,254 @@
+/* Medium Layout: 1280px. */
+
+@media only screen and (min-width: 1200px) and (max-width: 1500px) {
+    .download-area {
+        background-size: 50%;
+    }
+    .social-area {
+        background-size: auto 70%;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .download-area {
+        background-size: 50%;
+    }
+    .social-area {
+        background-size: auto 60%;
+    }
+    .network-area {
+        background-size: auto 70%;
+    }
+}
+
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    body {
+        font-size: 14px;
+    }
+    .single-service {
+        padding: 40px 20px;
+    }
+    .single-service .service-title {
+        font-size: 18px;
+    }
+    .social-area {
+        background-size: auto 50%;
+    }
+    .network-area {
+        background-size: auto 70%;
+    }
+    .price-box {
+        padding: 40px 10px;
+    }
+    .section-padding {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .section-padding-top {
+        padding-top: 80px;
+    }
+    .section-pd-top-2 {
+        padding-top: 30px;
+    }
+    .navbar-toggle {
+        border-color: transparent;
+    }
+    .navbar-toggle .icon-bar {
+        background-color: #6858db;
+        border-radius: 0;
+    }
+    .headline {
+        font-size: 28px;
+    }
+    .bttn-icon {
+        padding: 10px 20px;
+    }
+    .bttn-icon .bttn-content {
+        padding-left: 40px;
+    }
+    .bttn-icon .bttn-content .icon {
+        width: 20px;
+    }
+    .service-area {
+        padding-bottom: 0;
+    }
+    .single-service {
+        margin-bottom: 30px;
+    }
+    .network-area {
+        margin-top: 0;
+    }
+    .gallery {
+        width: auto;
+    }
+    .blog-single,
+    .single-team,
+    .price-box {
+        margin-bottom: 30px;
+    }
+    .single-testimonial {
+        padding: 40px 20px;
+    }
+    .single-testimonial:before {
+        display: none;
+    }
+    .home3 .download-area,
+    .home2 .download-area,
+    .download-area {
+        background: none;
+        padding: 0;
+    }
+    #map {
+        height: 300px
+    }
+    .single-feature .title {
+        font-size: 18px;
+    }
+    .form-double .form_group {
+        width: 100%;
+    }
+    .social-area {
+        padding-bottom: 30px;
+    }
+}
+
+
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+    .page-title {
+        font-size: 26px;
+    }
+    .header-area {
+        height: auto;
+        padding: 100px auto;
+    }
+    .vcenter {
+        position: static;
+        transform: translateY(0);
+    }
+    .section-padding {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .section-padding-top {
+        padding-top: 80px;
+    }
+    .section-pd-top-2 {
+        padding-top: 50px;
+    }
+    .navbar-toggle {
+        border-color: transparent;
+    }
+    .navbar-toggle .icon-bar {
+        background-color: #6858db;
+        border-radius: 0;
+    }
+    .navbar-bttn {
+        margin-top: 30px;
+        width: 100%;
+        text-align: center;
+    }
+    .mainmenu-area #mainmenu {
+        overflow-y: auto;
+        max-height: 80vh
+    }
+    .mainmenu-area ul.nav.navbar-nav li {
+        display: block;
+    }
+    .navbar-brand {
+        padding: 8px 0 0 10px;
+    }
+    .headline {
+        font-size: 28px;
+    }
+    .bttn-icon {
+        padding: 10px 20px;
+    }
+    .bttn-icon .bttn-content {
+        padding-left: 40px;
+    }
+    .bttn-icon .bttn-content .icon {
+        width: 20px;
+    }
+    .service-area {
+        padding-bottom: 0;
+    }
+    .single-service {
+        margin-bottom: 30px;
+        padding: 50px 30px 30px 30px;
+        border: 1px solid #ededed;
+    }
+    .network-area {
+        margin-top: 0;
+    }
+    .gallery {
+        width: auto;
+    }
+    .blog-single,
+    .single-team,
+    .price-box {
+        margin-bottom: 30px;
+    }
+    .single-testimonial {
+        padding: 40px 20px;
+    }
+    .single-testimonial:before {
+        display: none;
+    }
+    .home3 .download-area,
+    .home2 .download-area,
+    .download-area {
+        background: none;
+        padding: 0;
+    }
+    #map {
+        height: 300px
+    }
+    .single-feature .title {
+        font-size: 18px;
+    }
+    .form-double .form_group {
+        width: 100%;
+    }
+    .social-area {
+        padding-bottom: 30px;
+    }
+    #scrollUp {
+        right: 10px;
+        bottom: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        line-height: 30px;
+    }
+    .social-area {
+        background: none;
+    }
+    .social-logo {
+        margin-bottom: 10px;
+    }
+    .play-bttn {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+        line-height: 60px;
+        padding-left: 0;
+    }
+    #faq {
+        padding-bottom: 0;
+    }
+    .maps-area {
+        padding-top: 0;
+    }
+}
+
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
