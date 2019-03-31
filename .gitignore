@@ -12,7 +12,7 @@
 
 # don't take my models and compiled
 
-__pycache__/
+app/__pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
