@@ -1,0 +1,18 @@
+# dont't take .ipynb_checkpoints or data files (unnecessary large)
+*/.ipynb_checkpoints/*
+#*.csv
+#*.json
+
+# don't take my binaries
+!/**/
+!*.*
+*.exe
+*.out
+*.out
+
+# don't take my models and compiled
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
